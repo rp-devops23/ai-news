@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Weekly Digest</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:      #0f0f13;
+      --surface: #18181f;
+      --border:  #2a2a35;
+      --text:    #e2e2f0;
+      --muted:   #8888aa;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      padding: 2rem 1rem 5rem;
+    }
+
+    /* ── Header ── */
+    header {
+      max-width: 1100px;
+      margin: 0 auto 3rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1.5rem;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      background: linear-gradient(90deg, #a78bfa, #38bdf8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    header p {
+      color: var(--muted);
+      margin-top: .5rem;
+      font-size: .95rem;
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem;
+      margin-top: 1rem;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .3rem;
+      font-size: .75rem;
+      font-weight: 600;
+      padding: .25rem .65rem;
+      border-radius: 999px;
+      border: 1px solid currentColor;
+      opacity: .85;
+    }
+
+    /* ── Section ── */
+    .section {
+      max-width: 1100px;
+      margin: 0 auto 3.5rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .section-header h2 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: .03em;
+      text-transform: uppercase;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .section-rule {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ── Grids ── */
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .article-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 560px) {
+      .video-grid, .article-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ── Cards ── */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform .15s ease, border-color .15s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      border-color: #44445a;
+    }
+
+    .card-embed {
+      width: 100%;
+      aspect-ratio: 16/9;
+      border: none;
+      background: #000;
+      display: block;
+    }
+
+    .card-thumb {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+    }
+
+    .card-body {
+      padding: 1.1rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      gap: .55rem;
+    }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .5rem;
+    }
+
+    .source-tag {
+      font-size: .7rem;
+      color: var(--muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+
+    .card-title {
+      font-size: 1rem;
+      font-weight: 600;
+      line-height: 1.45;
+    }
+
+    .card-title a {
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    .card-title a:hover { color: #a78bfa; }
+
+    .card-reason {
+      font-size: .85rem;
+      color: var(--muted);
+      line-height: 1.55;
+      flex: 1;
+    }
+
+    .card-footer {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      margin-top: .2rem;
+    }
+
+    .pub-date {
+      font-size: .75rem;
+      color: var(--muted);
+    }
+
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: .8rem;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>⚡ AI Weekly Digest</h1>
+    <p>20 stories that matter — curated by Claude · Week of 16 March 2026</p>
+    <div class="legend">
+      <span class="badge" style="color:#a78bfa">🚀 AI Progress</span>
+      <span class="badge" style="color:#38bdf8">⚖️ Ethics &amp; Safety</span>
+      <span class="badge" style="color:#34d399">🌍 Climate &amp; Environment</span>
+      <span class="badge" style="color:#fbbf24">✨ Wildcard</span>
+    </div>
+  </header>
+
+  <div class="section">
+    <div class="section-header">
+      <h2>▶ Videos</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="video-grid">
+            <div class="card">
+                <img class="card-thumb" src="https://i4.ytimg.com/vi/W4iSvbg4f68/hqdefault.jpg" alt="" loading="lazy" />
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="source-tag">Matt Wolfe</span>
+            <span class="badge" style="color:#7c3aed">🚀 AI Progress</span>
+          </div>
+          <div class="card-title"><a href="https://www.youtube.com/shorts/W4iSvbg4f68" target="_blank" rel="noopener">Claude Just Dropped A Huge New Feature</a></div>
+          <div class="card-reason">Claude's interactive visualization capabilities represent meaningful progress in making AI-generated content more actionable and user-friendly for professionals.</div>
+          <div class="card-footer">
+            
+          </div>
+        </div>
+      </div>
+      <div class="card">
+                <img class="card-thumb" src="https://i3.ytimg.com/vi/BIp9Q8M2QUw/hqdefault.jpg" alt="" loading="lazy" />
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="source-tag">Matt Wolfe</span>
+            <span class="badge" style="color:#7c3aed">🚀 AI Progress</span>
+          </div>
+          <div class="card-title"><a href="https://www.youtube.com/shorts/BIp9Q8M2QUw" target="_blank" rel="noopener">The Coolest New Google AI Feature</a></div>
+          <div class="card-reason">Google's NotebookLM Cinematic Video Overviews demonstrate significant advancement in converting text content into rich multimedia formats, expanding AI's practical creative applications.</div>
+          <div class="card-footer">
+            
+          </div>
+        </div>
+      </div>
+      <div class="card">
+                <img class="card-thumb" src="https://i1.ytimg.com/vi/dEH17qq7wJQ/hqdefault.jpg" alt="" loading="lazy" />
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="source-tag">Matt Wolfe</span>
+            <span class="badge" style="color:#7c3aed">🚀 AI Progress</span>
+          </div>
+          <div class="card-title"><a href="https://www.youtube.com/shorts/dEH17qq7wJQ" target="_blank" rel="noopener">New Google AI Model: Hype or Actually Good?</a></div>
+          <div class="card-reason">Gemini 3.1 Flash-Lite exemplifies the industry shift toward optimizing models for efficiency and real-world use cases rather than pursuing raw performance metrics.</div>
+          <div class="card-footer">
+            
+          </div>
+        </div>
+      </div>
+      <div class="card">
+                <img class="card-thumb" src="https://i2.ytimg.com/vi/-Ow2PsJUWO8/hqdefault.jpg" alt="" loading="lazy" />
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="source-tag">Matt Wolfe</span>
+            <span class="badge" style="color:#7c3aed">🚀 AI Progress</span>
+          </div>
+          <div class="card-title"><a href="https://www.youtube.com/shorts/-Ow2PsJUWO8" target="_blank" rel="noopener">How To Use AI On Your Phone WITHOUT Internet</a></div>
+          <div class="card-reason">Running advanced AI models locally on phones without internet access democratizes access and addresses privacy concerns about cloud-dependent AI systems.</div>
+          <div class="card-footer">
+            
+          </div>
+        </div>
+      </div>
+      <div class="card">
+                <img class="card-thumb" src="https://i2.ytimg.com/vi/UgS5PihUBQM/hqdefault.jpg" alt="" loading="lazy" />
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="source-tag">Matt Wolfe</span>
+            <span class="badge" style="color:#0891b2">⚖️ Ethics & Safety</span>
+          </div>
+          <div class="card-title"><a href="https://www.youtube.com/shorts/UgS5PihUBQM" target="_blank" rel="noopener">The Meta Raybans Scandal Explained</a></div>
+          <div class="card-reason">Investigation revealing human contractors reviewing Meta Ray-Ban footage raises serious privacy and consent questions about how data from wearables is actually handled at scale.</div>
+          <div class="card-footer">
+            
+          </div>
+        </div>
+      </div>
+      <div class="card">
+                <img class="card-thumb" src="https://i3.ytimg.com/vi/retqU5rjzzI/hqdefault.jpg" alt="" loading="lazy" />
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="source-tag">Matt Wolfe</span>
+            <span class="badge" style="color:#d97706">✨ Wildcard</span>
+          </div>
+          <div class="card-title"><a href="https://www.youtube.com/shorts/retqU5rjzzI" target="_blank" rel="noopener">Is ChatGPT Creating MORE Work?</a></div>
+          <div class="card-reason">Harvard 8-month study showing AI tools make people work MORE rather than less fundamentally contradicts the productivity narrative and raises questions about whether efficiency gains benefit workers.</div>
+          <div class="card-footer">
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header">
+      <h2>📰 Articles</h2>
+      <div class="section-rule"></div>
+    </div>
+    <div class="article-grid">
+            <div class="card">
+        
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="source-tag">TechCrunch AI</span>
+            <span class="badge" style="color:#7c3aed">🚀 AI Progress</span>
+          </div>
+          <div class="card-title"><a href="https://techcrunch.com/2026/03/16/memories-ai-is-building-the-visual-memory-layer-for-wearables-and-robotics/" target="_blank" rel="noopener">Memories AI is building the visual memory layer for wearables and robotics</a></div>
+          <div class="card-reason">Visual memory models for robotics and wearables represent critical infrastructure for physical AI systems that must understand and navigate real-world environments.</div>
+          <div class="card-footer">
+            <span class="pub-date">📅 16 Mar 2026</span>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="source-tag">TechCrunch AI</span>
+            <span class="badge" style="color:#7c3aed">🚀 AI Progress</span>
+          </div>
+          <div class="card-title"><a href="https://techcrunch.com/2026/03/16/nvidias-dlss-5-uses-generative-ai-to-boost-photo-realism-in-video-games-with-ambitions-beyond-gaming/" target="_blank" rel="noopener">Nvidia’s DLSS 5 uses generative AI to boost photorealism in video games, with ambitions beyond gaming</a></div>
+          <div class="card-reason">Nvidia's DLSS 5 using generative AI for photorealism shows how AI can enhance rather than replace traditional graphics pipelines, opening new possibilities for real-time rendering.</div>
+          <div class="card-footer">
+            <span class="pub-date">📅 16 Mar 2026</span>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="source-tag">MIT Technology Review</span>
+            <span class="badge" style="color:#7c3aed">🚀 AI Progress</span>
+          </div>
+          <div class="card-title"><a href="https://www.technologyreview.com/2026/03/13/1134230/future-ai-chips-could-be-built-on-glass/" target="_blank" rel="noopener">Future AI chips could be built on glass</a></div>
+          <div class="card-reason">Glass-based AI chips represent a fundamental architectural innovation that could overcome silicon scaling limitations and reduce data center energy consumption.</div>
+          <div class="card-footer">
+            <span class="pub-date">📅 13 Mar 2026</span>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="source-tag">TechCrunch AI</span>
+            <span class="badge" style="color:#7c3aed">🚀 AI Progress</span>
+          </div>
+          <div class="card-title"><a href="https://techcrunch.com/2026/03/13/the-wild-six-weeks-for-nanoclaws-creator-that-led-to-a-deal-with-docker/" target="_blank" rel="noopener">The wild six weeks for NanoClaw’s creator that led to a deal with Docker</a></div>
+          <div class="card-reason">NanoClaw's rapid rise from open-source project to Docker partnership demonstrates how community-driven AI development can achieve enterprise adoption at scale.</div>
+          <div class="card-footer">
+            <span class="pub-date">📅 13 Mar 2026</span>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="source-tag">TechCrunch AI</span>
+            <span class="badge" style="color:#0891b2">⚖️ Ethics & Safety</span>
+          </div>
+          <div class="card-title"><a href="https://techcrunch.com/2026/03/16/elon-musks-xai-faces-child-porn-lawsuit-from-minors-grok-allegedly-undressed/" target="_blank" rel="noopener">Elon Musk’s xAI faces child porn lawsuit from minors Grok allegedly undressed</a></div>
+          <div class="card-reason">Lawsuit against xAI for generating CSAM highlights critical failure in AI safety guardrails and demonstrates urgent need for robust content moderation in generative AI systems.</div>
+          <div class="card-footer">
+            <span class="pub-date">📅 16 Mar 2026</span>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="source-tag">TechCrunch AI</span>
+            <span class="badge" style="color:#0891b2">⚖️ Ethics & Safety</span>
+          </div>
+          <div class="card-title"><a href="https://techcrunch.com/2026/03/16/warren-presses-pentagon-over-decision-to-grant-xai-access-to-classified-networks/" target="_blank" rel="noopener">Warren presses Pentagon over decision to grant xAI access to classified networks</a></div>
+          <div class="card-reason">Senator Warren's concerns about xAI gaining classified network access raises fundamental questions about due diligence and national security in AI procurement decisions.</div>
+          <div class="card-footer">
+            <span class="pub-date">📅 16 Mar 2026</span>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="source-tag">TechCrunch AI</span>
+            <span class="badge" style="color:#0891b2">⚖️ Ethics & Safety</span>
+          </div>
+          <div class="card-title"><a href="https://techcrunch.com/2026/03/15/lawyer-behind-ai-psychosis-cases-warns-of-mass-casualty-risks/" target="_blank" rel="noopener">Lawyer behind AI psychosis cases warns of mass casualty risks</a></div>
+          <div class="card-reason">Lawyer warning about AI chatbots in mass casualty cases reveals systemic harm from inadequate safety testing and escalates concerns about real-world casualties from AI systems.</div>
+          <div class="card-footer">
+            <span class="pub-date">📅 15 Mar 2026</span>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="source-tag">TechCrunch AI</span>
+            <span class="badge" style="color:#0891b2">⚖️ Ethics & Safety</span>
+          </div>
+          <div class="card-title"><a href="https://techcrunch.com/2026/03/16/merriam-webster-openai-encyclopedia-brittanica-lawsuit/" target="_blank" rel="noopener">The dictionary sues OpenAI</a></div>
+          <div class="card-reason">Dictionary publishers suing OpenAI for copyright violation of ~100,000 articles sets important legal precedent that content creators' rights cannot be automatically overridden for AI training.</div>
+          <div class="card-footer">
+            <span class="pub-date">📅 16 Mar 2026</span>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="source-tag">The Guardian Tech</span>
+            <span class="badge" style="color:#0891b2">⚖️ Ethics & Safety</span>
+          </div>
+          <div class="card-title"><a href="https://www.theguardian.com/technology/2026/mar/16/google-scraps-ai-search-feature-that-crowdsourced-amateur-medical-advice" target="_blank" rel="noopener">Google scraps AI search feature that crowdsourced amateur medical advice</a></div>
+          <div class="card-reason">Google scrapping its AI medical advice tool amid scrutiny shows how public pressure and regulatory oversight can force companies to reconsider potentially harmful AI deployments.</div>
+          <div class="card-footer">
+            <span class="pub-date">📅 16 Mar 2026</span>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="source-tag">The Guardian Tech</span>
+            <span class="badge" style="color:#0891b2">⚖️ Ethics & Safety</span>
+          </div>
+          <div class="card-title"><a href="https://www.theguardian.com/technology/2026/mar/14/ai-chatbots-psychosis" target="_blank" rel="noopener">New study raises concerns about AI chatbots fueling delusional thinking</a></div>
+          <div class="card-reason">Scientific study on AI chatbots fueling delusional thinking identifies potential harm to vulnerable populations and underscores need for mental health safeguards in AI systems.</div>
+          <div class="card-footer">
+            <span class="pub-date">📅 14 Mar 2026</span>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="source-tag">The Guardian Tech</span>
+            <span class="badge" style="color:#059669">🌍 Climate & Environment</span>
+          </div>
+          <div class="card-title"><a href="https://www.theguardian.com/australia-news/2026/mar/13/ai-datacentres-environmental-impacts" target="_blank" rel="noopener">The environmental cost of datacentres is rising. Is it time to quit AI?</a></div>
+          <div class="card-reason">Guardian article on environmental cost of datacenters and the QuitGPT movement directly challenges whether AI's societal benefits justify its substantial and growing energy consumption.</div>
+          <div class="card-footer">
+            <span class="pub-date">📅 13 Mar 2026</span>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="source-tag">The Guardian Tech</span>
+            <span class="badge" style="color:#059669">🌍 Climate & Environment</span>
+          </div>
+          <div class="card-title"><a href="https://www.theguardian.com/news/ng-interactive/2026/mar/14/datacentre-boom-is-uk-ai-bubble-about-to-burst" target="_blank" rel="noopener">Invisible datacentres and capricious chips: is UK’s AI bubble about to burst?</a></div>
+          <div class="card-reason">UK datacentre investment bubble analysis reveals how AI infrastructure deployment creates massive capital and energy commitments that may not be sustainable or economically justified.</div>
+          <div class="card-footer">
+            <span class="pub-date">📅 14 Mar 2026</span>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="source-tag">Carbon Brief</span>
+            <span class="badge" style="color:#059669">🌍 Climate & Environment</span>
+          </div>
+          <div class="card-title"><a href="https://www.carbonbrief.org/ccc-net-zero-will-protect-uk-from-fossil-fuel-price-shocks/" target="_blank" rel="noopener">CCC: Net-zero will protect UK from fossil-fuel price shocks</a></div>
+          <div class="card-reason">UK Climate Change Committee analysis showing net-zero emissions path protects against fossil fuel price volatility provides economic argument that clean energy transition reduces AI's indirect climate costs.</div>
+          <div class="card-footer">
+            <span class="pub-date">📅 11 Mar 2026</span>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="source-tag">MIT Technology Review</span>
+            <span class="badge" style="color:#059669">🌍 Climate & Environment</span>
+          </div>
+          <div class="card-title"><a href="https://www.technologyreview.com/2026/03/13/1134184/why-physical-ai-is-becoming-manufacturings-next-advantage/" target="_blank" rel="noopener">Why physical AI is becoming manufacturing’s next advantage</a></div>
+          <div class="card-reason">MIT analysis of physical AI in manufacturing shows energy implications of deploying AI in robotics and industrial systems that require continuous power and environmental control.</div>
+          <div class="card-footer">
+            <span class="pub-date">📅 13 Mar 2026</span>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        
+        <div class="card-body">
+          <div class="card-meta">
+            <span class="source-tag">The Guardian Tech</span>
+            <span class="badge" style="color:#d97706">✨ Wildcard</span>
+          </div>
+          <div class="card-title"><a href="https://www.theguardian.com/us-news/ng-interactive/2026/mar/15/ai-defense-warfare-companies" target="_blank" rel="noopener">These aren’t AI firms, they’re defense contractors. We can’t let them hide behind their models</a></div>
+          <div class="card-reason">Guardian exposé connecting AI defense contractors to Gaza and Iran operations without transparency demonstrates how AI warfare is advancing faster than governance mechanisms can address.</div>
+          <div class="card-footer">
+            <span class="pub-date">📅 15 Mar 2026</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    Generated on 2026-03-16 21:37 UTC · Powered by Claude (Haiku) + RSS + YouTube feeds
+  </footer>
+</body>
+</html>
